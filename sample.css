@@ -1,0 +1,309 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #000000; /* Pure Black Background */
+    color: #ffffff;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* --- Mulu Page ekatama Hexagon Pattern eka --- */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="28" height="49" viewBox="0 0 28 49"%3E%3Cg fill-rule="evenodd"%3E%3Cg id="hexagons" fill="%2300dfc0" fill-opacity="0.15" fill-rule="nonzero"%3E%3Cpath d="M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+    z-index: -1;
+    animation: movePattern 25s linear infinite;
+}
+
+@keyframes movePattern {
+    from { background-position: 0 0; }
+    to { background-position: 56px 98px; }
+}
+
+#bgCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* --- Navigation Fixes (Perfectly Centered) --- */
+header {
+    padding: 15px 10%;
+    position: fixed;
+    width: 100%;
+    background: rgba(10, 10, 10, 0.9);
+    backdrop-filter: blur(15px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0, 223, 192, 0.1);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: #00dfc0;
+    text-shadow: 0 0 10px rgba(0, 223, 192, 0.5);
+    z-index: 1001; 
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); 
+}
+
+nav ul li {
+    margin: 0 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    transition: 0.3s;
+    position: relative;
+    font-size: 0.95rem;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #00dfc0;
+    transition: 0.3s;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+nav ul li a:hover {
+    color: #00dfc0;
+}
+
+/* --- Hero Section --- */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 10%;
+}
+
+.hero-content h4 {
+    color: #00dfc0;
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.hero-content h1 {
+    font-size: 4.5rem;
+    margin: 10px 0;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.hero-content h1 span {
+    color: #00dfc0;
+    text-shadow: 0 0 20px rgba(0, 223, 192, 0.4);
+}
+
+/* --- About & Projects Section --- */
+.projects {
+    padding: 100px 10%;
+    text-align: center;
+}
+
+.about-text {
+    max-width: 800px;
+    margin: 0 auto 60px;
+    line-height: 1.8;
+    color: #cbd5e1;
+    font-size: 1.1rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.project-card {
+    background: rgba(26, 26, 26, 0.4);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    transition: 0.4s ease;
+    overflow: hidden; 
+    text-align: left;
+}
+
+.project-card:hover {
+    border-color: #00dfc0;
+    background: rgba(34, 34, 34, 0.6);
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 223, 192, 0.1);
+}
+
+.project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    opacity: 0.8;
+    transition: 0.4s;
+}
+
+.project-card:hover img {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.project-info {
+    padding: 25px;
+}
+
+.project-info h3 {
+    color: #00dfc0;
+    margin-bottom: 10px;
+}
+
+.project-info p {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    line-height: 1.5;
+}
+
+/* --- Contact Section --- */
+.contact-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 50px;
+    text-align: center;
+    border-radius: 30px;
+    border: 1px solid rgba(0, 223, 192, 0.3); 
+    background: linear-gradient(145deg, rgba(17, 24, 39, 0.9), rgba(10, 10, 10, 0.9));
+    backdrop-filter: blur(15px);
+}
+
+.btn {
+    padding: 12px 35px;
+    background: #00dfc0;
+    color: #000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.btn:hover {
+    background: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 223, 192, 0.4);
+}
+
+footer {
+    padding: 50px;
+    color: #4b5563;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+}
+
+/* --- CSS MEDIA QUERIES (MOBILE FIXES) --- */
+
+@media (max-width: 768px) {
+    header {
+        padding: 10px 5%;
+    }
+
+    nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    nav ul {
+        position: static; /* Absolute eka ain kala */
+        transform: none; 
+        left: 0;
+        gap: 10px;
+        flex-wrap: wrap; /* Links peliye thallu wenna */
+        justify-content: center;
+    }
+
+    nav ul li {
+        margin: 5px 10px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.8rem; /* Font loku wadi nisa adu kala */
+    }
+
+    .hero-content h4 {
+        font-size: 1rem;
+    }
+
+    .projects {
+        padding: 60px 5%;
+    }
+
+    .about-text {
+        font-size: 1rem;
+        padding: 20px;
+    }
+
+    .contact-container {
+        padding: 30px 15px;
+        margin: 0 10px;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr; /* Cards peliye enne yata yata */
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+}

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tharusha Shehan | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- ORIGINAL CSS RETAINED --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; background-color: #020617; color: #ffffff; overflow-x: hidden; position: relative; }
+        body::before { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="28" height="49" viewBox="0 0 28 49"%3E%3Cg fill-rule="evenodd"%3E%3Cg id="hexagons" fill="%2300d2ff" fill-opacity="0.1" fill-rule="nonzero"%3E%3Cpath d="M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E'); z-index: -1; animation: movePattern 40s linear infinite; }
+        #bgCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        @keyframes movePattern { from { background-position: 0 0; } to { background-position: 56px 98px; } }
+        header { position: fixed; width: 100%; padding: 15px 50px; z-index: 100; background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(0, 210, 255, 0.1); }
+        nav { display: flex; align-items: center; justify-content: center; max-width: 1200px; margin: 0 auto; position: relative; }
+        .logo { position: absolute; left: 0; font-weight: 700; font-size: 1.8rem; background: linear-gradient(to right, #00d2ff, #3a7bd5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        nav ul { display: flex; list-style: none; gap: 40px; }
+        nav ul li a { color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: 0.3s; font-weight: 500; font-size: 0.95rem; }
+        nav ul li a:hover { color: #00d2ff; }
+        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; background: radial-gradient(circle at center, rgba(0, 210, 255, 0.05) 0%, transparent 70%); padding: 0 20px; }
+        .hero-content h4 { font-size: 1.5rem; font-weight: 400; color: #00d2ff; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 4px; }
+        .hero-content h1 { font-size: 5rem; margin: 10px 0; font-weight: 700; line-height: 1.1; }
+        .hero-content h1 span { background: linear-gradient(to right, #ffffff, #00d2ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .btn { display: inline-block; margin-top: 20px; padding: 16px 40px; background: linear-gradient(45deg, #00d2ff, #3a7bd5); color: #fff; font-weight: 600; text-decoration: none; border-radius: 50px; transition: 0.4s; box-shadow: 0 10px 20px rgba(0, 210, 255, 0.2); }
+        .btn:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0, 210, 255, 0.4); }
+        section { padding: 120px 20px; text-align: center; }
+        h2 { font-size: 3rem; margin-bottom: 50px; font-weight: 700; background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .about-text { background: rgba(255, 255, 255, 0.03); padding: 40px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); max-width: 800px; margin: 0 auto; line-height: 1.8; font-size: 1.15rem; color: #cbd5e1; }
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1300px; margin: 0 auto; }
+        .project-card { background: rgba(15, 23, 42, 0.4); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 24px; overflow: hidden; transition: 0.5s; backdrop-filter: blur(12px); text-align: left; cursor: pointer; }
+        .project-card:hover { transform: translateY(-10px); border-color: rgba(0, 210, 255, 0.5); }
+        .project-img { height: 200px; overflow: hidden; }
+        .project-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s; }
+        .project-card:hover .project-img img { transform: scale(1.1); }
+        .project-info { padding: 25px; }
+        .project-info h3 { color: #00d2ff; margin-bottom: 10px; font-size: 1.4rem; }
+        .project-info p { font-size: 0.9rem; color: #94a3b8; line-height: 1.5; }
+        .contact-container { max-width: 700px; margin: 0 auto; padding: 50px; border-radius: 30px; background: linear-gradient(145deg, rgba(15, 23, 42, 0.8), rgba(2, 6, 23, 0.8)); border: 1px solid rgba(0, 210, 255, 0.2); }
+        .contact-info-item { margin: 20px 0; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; gap: 15px; word-break: break-all; }
+        .contact-info-item i { color: #00d2ff; font-size: 1.3rem; }
+        footer { padding: 40px; text-align: center; color: #64748b; font-size: 0.9rem; }
+
+        /* --- NEW MODAL (POPUP) CSS --- */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 2000;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(2, 6, 23, 0.95);
+            backdrop-filter: blur(10px);
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: rgba(15, 23, 42, 0.9);
+            margin: 5% auto;
+            padding: 40px;
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            width: 80%;
+            max-width: 800px;
+            border-radius: 30px;
+            position: relative;
+            animation: modalSlide 0.4s ease;
+        }
+
+        @keyframes modalSlide {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 25px;
+            top: 20px;
+            color: #fff;
+            font-size: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close-btn:hover { color: #00d2ff; }
+
+        .modal-body h2 { font-size: 2.5rem; margin-bottom: 20px; text-align: left; }
+        .modal-body p { line-height: 1.8; color: #cbd5e1; font-size: 1.1rem; }
+        
+        /* Mobile adjustment */
+        @media (max-width: 768px) {
+            header { padding: 10px 20px; }
+            nav { flex-direction: column; gap: 10px; }
+            .logo { position: static; margin-bottom: 5px; }
+            nav ul { gap: 15px; flex-wrap: wrap; justify-content: center; }
+            .hero-content h1 { font-size: 2.8rem; }
+            .modal-content { width: 90%; margin: 20% auto; padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="bgCanvas"></canvas>
+
+    <header>
+        <nav>
+            <div class="logo">TS.</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h4>Hello, I'm</h4>
+            <h1>Tharusha <span>Shehan</span></h1>
+            <p>Creative Designer • Full-Stack Developer • Software Engineer Student</p>
+            <a href="#contact" class="btn">Start a Project</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <div class="about-text">
+            I am a passionate Software Engineering student with a strong foundation in creative design and web development. My goal is to build clean, modern, and high-performance digital solutions that solve real-world problems. With experience in both technical development and showroom management, I bring a unique blend of leadership and coding expertise to every project.
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Expertise & Roles</h2>
+        <div class="project-grid">
+            
+            <div class="project-card" onclick="openModal('modal1')">
+                <div class="project-img">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop" alt="Software Engineering">
+                </div>
+                <div class="project-info">
+                    <h3>Software Engineer</h3>
+                    <p>Building high-performance applications and exploring the depths of software architecture.</p>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openModal('modal2')">
+                <div class="project-img">
+                    <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=1000&auto=format&fit=crop" alt="Web Development">
+                </div>
+                <div class="project-info">
+                    <h3>Web Developer</h3>
+                    <p>Designing and developing interactive, responsive websites using the latest UI trends.</p>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openModal('modal3')">
+                <div class="project-img">
+                    <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=1000&auto=format&fit=crop" alt="Graphic Design">
+                </div>
+                <div class="project-info">
+                    <h3>Graphic Designer</h3>
+                    <p>Creating visual identities, branding, and digital assets with a focus on modern aesthetics.</p>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openModal('modal4')">
+                <div class="project-img">
+                    <img src="https://st4.depositphotos.com/8846918/31108/i/450/depositphotos_311089124-stock-photo-manager-working-with-a-computer.jpg" alt="Showroom Management">
+                </div>
+                <div class="project-info">
+                    <h3>Showroom Manager</h3>
+                    <p>Leading retail operations and teams to deliver exceptional customer service.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal1')">&times;</span>
+            <div class="modal-body">
+                <h2>Software Engineering</h2>
+                <p>As a Software Engineering student, I focus on creating robust and scalable systems. My expertise includes Java, Python, and C#. I enjoy solving complex algorithmic problems and learning about system architecture to build applications that are not only functional but also highly efficient.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal2')">&times;</span>
+            <div class="modal-body">
+                <h2>Web Development</h2>
+                <p>My web development journey involves mastering modern frameworks like React and Node.js. I specialize in building responsive, fast-loading websites with clean code and intuitive user interfaces. From front-end aesthetics to back-end logic, I handle the full development lifecycle.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal3')">&times;</span>
+            <div class="modal-body">
+                <h2>Graphic Design</h2>
+                <p>Visual storytelling is my passion. I use tools like Adobe Photoshop and Illustrator to create compelling brand identities and digital assets. My design philosophy is based on minimalism and clarity, ensuring that every visual element serves a specific purpose for the audience.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal4')">&times;</span>
+            <div class="modal-body">
+                <h2>Showroom Management</h2>
+                <p>Leadership and operations are key parts of my professional background. Managing a showroom has taught me valuable lessons in team coordination, customer relationship management (CRM), and strategic planning. I bridge the gap between technical expertise and business management.</p>
+            </div>
+        </div>
+    </div>
+
+    <section id="contact">
+        <div class="contact-container">
+            <h2>Get In Touch</h2>
+            <div class="contact-info-item"><i class="fas fa-envelope"></i>tharushashehan@</div>
+            <div class="contact-info-item"><i class="fas fa-phone-alt fa-flip-horizontal"></i> 0789537539</div>
+            <a href="mailto:tharushashehan1999@gmail.com" class="btn">Send an Email</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Tharusha Shehan</p>
+    </footer>
+
+    <script>
+        /* --- ORIGINAL PARTICLE SCRIPT --- */
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        let particlesArray = [];
+        const mouse = { x: null, y: null };
+        window.addEventListener('mousemove', function(event) {
+            mouse.x = event.x; mouse.y = event.y;
+            for (let i = 0; i < 2; i++) { particlesArray.push(new Particle()); }
+        });
+        class Particle {
+            constructor() {
+                this.x = mouse.x; this.y = mouse.y;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 2 - 1; this.speedY = Math.random() * 2 - 1;
+                this.color = 'rgba(0, 210, 255, 0.3)';
+            }
+            update() { this.x += this.speedX; this.y += this.speedY; if (this.size > 0.1) this.size -= 0.05; }
+            draw() { ctx.fillStyle = this.color; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+        }
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update(); particlesArray[i].draw();
+                if (particlesArray[i].size <= 0.2) { particlesArray.splice(i, 1); i--; }
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+        window.addEventListener('resize', function() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+
+        /* --- NEW MODAL SCRIPT --- */
+        function openModal(id) {
+            document.getElementById(id).style.display = "block";
+            document.body.style.overflow = "hidden"; // Disable background scroll
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = "none";
+            document.body.style.overflow = "auto"; // Enable background scroll
+        }
+
+        // Close modal if user clicks outside of the box
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        }
+    </script>
+</body>
+</html>
