@@ -3,11 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tharusha Shehan | Portfolio</title>
+    <title>Tharusha Shehan</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        /* --- ORIGINAL CSS RETAINED --- */
+        /* --- LOADING SCREEN CSS --- */
+        #loader-wrapper {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: #020617; /* Page theme eke background eka */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.8s ease, visibility 0.8s;
+        }
+
+        .loader-logo {
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #00d2ff, #3a7bd5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 2s infinite ease-in-out;
+            letter-spacing: 5px;
+            filter: drop-shadow(0 0 15px rgba(0, 210, 255, 0.3));
+        }
+
+        .terminal-text {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: #00d2ff;
+            margin-top: 20px;
+            height: 20px;
+            opacity: 0.7;
+            letter-spacing: 1px;
+        }
+
+        .loader-bar-container {
+            width: 200px;
+            height: 2px;
+            background: rgba(0, 210, 255, 0.1);
+            margin-top: 15px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .loader-progress {
+            position: absolute;
+            left: 0; top: 0;
+            height: 100%;
+            width: 0%;
+            background: #00d2ff;
+            box-shadow: 0 0 10px #00d2ff;
+            transition: width 0.4s ease;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+
+        .loader-hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* --- ORIGINAL CSS --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body { font-family: 'Poppins', sans-serif; background-color: #020617; color: #ffffff; overflow-x: hidden; position: relative; }
@@ -24,7 +89,7 @@
         .hero-content h4 { font-size: 1.5rem; font-weight: 400; color: #00d2ff; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 4px; }
         .hero-content h1 { font-size: 5rem; margin: 10px 0; font-weight: 700; line-height: 1.1; }
         .hero-content h1 span { background: linear-gradient(to right, #ffffff, #00d2ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .btn { display: inline-block; margin-top: 20px; padding: 16px 40px; background: linear-gradient(45deg, #00d2ff, #3a7bd5); color: #fff; font-weight: 600; text-decoration: none; border-radius: 50px; transition: 0.4s; box-shadow: 0 10px 20px rgba(0, 210, 255, 0.2); }
+        .btn { display: inline-block; margin: 10px; padding: 16px 40px; background: linear-gradient(45deg, #00d2ff, #3a7bd5); color: #fff; font-weight: 600; text-decoration: none; border-radius: 50px; transition: 0.4s; box-shadow: 0 10px 20px rgba(0, 210, 255, 0.2); border:none; cursor: pointer; }
         .btn:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0, 210, 255, 0.4); }
         section { padding: 120px 20px; text-align: center; }
         h2 { font-size: 3rem; margin-bottom: 50px; font-weight: 700; background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -41,53 +106,21 @@
         .contact-container { max-width: 700px; margin: 0 auto; padding: 50px; border-radius: 30px; background: linear-gradient(145deg, rgba(15, 23, 42, 0.8), rgba(2, 6, 23, 0.8)); border: 1px solid rgba(0, 210, 255, 0.2); }
         .contact-info-item { margin: 20px 0; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; gap: 15px; word-break: break-all; }
         .contact-info-item i { color: #00d2ff; font-size: 1.3rem; }
-        footer { padding: 40px; text-align: center; color: #64748b; font-size: 0.9rem; }
-
-        /* --- NEW MODAL (POPUP) CSS --- */
-        .modal {
-            display: none; 
-            position: fixed;
-            z-index: 2000;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-color: rgba(2, 6, 23, 0.95);
-            backdrop-filter: blur(10px);
-            overflow-y: auto;
-        }
-
-        .modal-content {
-            background: rgba(15, 23, 42, 0.9);
-            margin: 5% auto;
-            padding: 40px;
-            border: 1px solid rgba(0, 210, 255, 0.3);
-            width: 80%;
-            max-width: 800px;
-            border-radius: 30px;
-            position: relative;
-            animation: modalSlide 0.4s ease;
-        }
-
-        @keyframes modalSlide {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .close-btn {
-            position: absolute;
-            right: 25px;
-            top: 20px;
-            color: #fff;
-            font-size: 30px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
+        footer { padding: 40px; text-align: center; color: #64748b; font-size: 0.9rem; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        .skills-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1000px; margin: 0 auto; }
+        .skill-badge { background: rgba(0, 210, 255, 0.1); border: 1px solid rgba(0, 210, 255, 0.3); padding: 10px 25px; border-radius: 50px; font-size: 1rem; color: #00d2ff; transition: 0.3s; }
+        .skill-badge:hover { background: #00d2ff; color: #020617; }
+        .social-icons { margin-top: 20px; display: flex; justify-content: center; gap: 25px; }
+        .social-icons a { color: #94a3b8; font-size: 1.5rem; transition: 0.3s; }
+        .social-icons a:hover { color: #00d2ff; transform: scale(1.2); }
+        .modal { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(2, 6, 23, 0.95); backdrop-filter: blur(10px); overflow-y: auto; }
+        .modal-content { background: rgba(15, 23, 42, 0.9); margin: 5% auto; padding: 40px; border: 1px solid rgba(0, 210, 255, 0.3); width: 80%; max-width: 800px; border-radius: 30px; position: relative; animation: modalSlide 0.4s ease; }
+        @keyframes modalSlide { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .close-btn { position: absolute; right: 25px; top: 20px; color: #fff; font-size: 30px; cursor: pointer; transition: 0.3s; }
         .close-btn:hover { color: #00d2ff; }
-
         .modal-body h2 { font-size: 2.5rem; margin-bottom: 20px; text-align: left; }
         .modal-body p { line-height: 1.8; color: #cbd5e1; font-size: 1.1rem; }
         
-        /* Mobile adjustment */
         @media (max-width: 768px) {
             header { padding: 10px 20px; }
             nav { flex-direction: column; gap: 10px; }
@@ -100,15 +133,24 @@
 </head>
 <body>
 
+    <div id="loader-wrapper">
+        <div class="loader-logo">TS.</div>
+        <div class="terminal-text" id="terminal-text">Initializing...</div>
+        <div class="loader-bar-container">
+            <div class="loader-progress" id="loader-progress"></div>
+        </div>
+    </div>
+
     <canvas id="bgCanvas"></canvas>
 
     <header>
         <nav>
-            <div class="logo">TS.</div>
+            <div class="logo">TS.DEV</div>
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Expertise</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -119,7 +161,10 @@
             <h4>Hello, I'm</h4>
             <h1>Tharusha <span>Shehan</span></h1>
             <p>Creative Designer • Full-Stack Developer • Software Engineer Student</p>
-            <a href="#contact" class="btn">Start a Project</a>
+            <div style="margin-top: 20px;">
+                <a href="#contact" class="btn">Start a Project</a>
+                <a href="https://github.com/tharushashehan1999-bit" target="_blank" class="btn" style="background: transparent; border: 1px solid #00d2ff;">View GitHub</a>
+            </div>
         </div>
     </section>
 
@@ -130,10 +175,24 @@
         </div>
     </section>
 
+    <section id="skills">
+        <h2>Tech Stack</h2>
+        <div class="skills-container">
+            <div class="skill-badge">Java</div>
+            <div class="skill-badge">Python</div>
+            <div class="skill-badge">Figma</div>
+            <div class="skill-badge">VS Code</div>
+            <div class="skill-badge">Node.js</div>
+            <div class="skill-badge">HTML5 & CSS3</div>
+            <div class="skill-badge">Adobe Photoshop</div>
+            <div class="skill-badge">Illustrator</div>
+            <div class="skill-badge">SQL</div>
+        </div>
+    </section>
+
     <section id="projects">
         <h2>Expertise & Roles</h2>
         <div class="project-grid">
-            
             <div class="project-card" onclick="openModal('modal1')">
                 <div class="project-img">
                     <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop" alt="Software Engineering">
@@ -173,7 +232,6 @@
                     <p>Leading retail operations and teams to deliver exceptional customer service.</p>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -192,27 +250,25 @@
             <span class="close-btn" onclick="closeModal('modal2')">&times;</span>
             <div class="modal-body">
                 <h2>Web Development</h2>
-                <p>My web development journey involves mastering modern frameworks like React and Node.js. I specialize in building responsive, fast-loading websites with clean code and intuitive user interfaces. From front-end aesthetics to back-end logic, I handle the full development lifecycle.</p>
+                <p>My web development journey involves mastering modern frameworks like React and Node.js. I specialize in building responsive, fast-loading websites with clean code and intuitive user interfaces.</p>
             </div>
         </div>
     </div>
-
     <div id="modal3" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('modal3')">&times;</span>
             <div class="modal-body">
                 <h2>Graphic Design</h2>
-                <p>Visual storytelling is my passion. I use tools like Adobe Photoshop and Illustrator to create compelling brand identities and digital assets. My design philosophy is based on minimalism and clarity, ensuring that every visual element serves a specific purpose for the audience.</p>
+                <p>Visual storytelling is my passion. I use tools like Adobe Photoshop and Illustrator to create compelling brand identities and digital assets.</p>
             </div>
         </div>
     </div>
-
     <div id="modal4" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('modal4')">&times;</span>
             <div class="modal-body">
                 <h2>Showroom Management</h2>
-                <p>Leadership and operations are key parts of my professional background. Managing a showroom has taught me valuable lessons in team coordination, customer relationship management (CRM), and strategic planning. I bridge the gap between technical expertise and business management.</p>
+                <p>Leadership and operations are key parts of my professional background. Managing a showroom has taught me valuable lessons in team coordination and strategic planning.</p>
             </div>
         </div>
     </div>
@@ -220,18 +276,60 @@
     <section id="contact">
         <div class="contact-container">
             <h2>Get In Touch</h2>
-            <div class="contact-info-item"><i class="fas fa-envelope"></i>tharushashehan@</div>
-            <div class="contact-info-item"><i class="fas fa-phone-alt fa-flip-horizontal"></i> 0789537539</div>
-            <a href="mailto:tharushashehan1999@gmail.com" class="btn">Send an Email</a>
+            <div class="contact-info-item"><i class="fas fa-envelope"></i>tharushashehan1999@gmail.com</div>
+            <div class="contact-info-item"><i class="fas fa-phone-alt"></i> 0789537539</div>
+            <div style="margin-top: 30px;">
+                <a href="mailto:tharushashehan1999@gmail.com" class="btn">Send Email</a>
+            </div>
+            <div class="social-icons">
+                <a href="https://github.com/tharushashehan1999-bit" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 Tharusha Shehan</p>
+        <p>&copy; 2026 Tharusha Shehan | All Rights Reserved.</p>
+        <h5><div class="logo">TS.</div></h5>
+        <h5>Create your own digital presence</h5>
     </footer>
 
     <script>
-        /* --- ORIGINAL PARTICLE SCRIPT --- */
+        // --- LOADING SCRIPT ---
+        const messages = [
+            "Initializing core systems...",
+            "Loading navigation matrix...",
+            "Decrypting style sheets...",
+            "Compiling tech stack...",
+            "System online."
+        ];
+        
+        const terminal = document.getElementById('terminal-text');
+        const progress = document.getElementById('loader-progress');
+        const loader = document.getElementById('loader-wrapper');
+        let step = 0;
+
+        function updateLoader() {
+            if (step < messages.length) {
+                terminal.innerText = messages[step];
+                progress.style.width = ((step + 1) / messages.length) * 100 + "%";
+                step++;
+                setTimeout(updateLoader, 500); 
+            } else {
+                setTimeout(() => {
+                    loader.classList.add('loader-hidden');
+                    document.body.style.overflow = "auto";
+                }, 400);
+            }
+        }
+        
+        // Prevent scroll while loading
+        document.body.style.overflow = "hidden";
+        window.onload = updateLoader;
+
+        /* --- ORIGINAL SCRIPTS --- */
         const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
@@ -262,25 +360,9 @@
         animate();
         window.addEventListener('resize', function() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
 
-        /* --- NEW MODAL SCRIPT --- */
-        function openModal(id) {
-            document.getElementById(id).style.display = "block";
-            document.body.style.overflow = "hidden"; // Disable background scroll
-        }
-
-        function closeModal(id) {
-            document.getElementById(id).style.display = "none";
-            document.body.style.overflow = "auto"; // Enable background scroll
-        }
-
-        // Close modal if user clicks outside of the box
-        window.onclick = function(event) {
-            if (event.target.className === 'modal') {
-                event.target.style.display = "none";
-                document.body.style.overflow = "auto";
-            }
-        }
+        function openModal(id) { document.getElementById(id).style.display = "block"; document.body.style.overflow = "hidden"; }
+        function closeModal(id) { document.getElementById(id).style.display = "none"; document.body.style.overflow = "auto"; }
+        window.onclick = function(event) { if (event.target.className === 'modal') { event.target.style.display = "none"; document.body.style.overflow = "auto"; } }
     </script>
 </body>
-
 </html>
